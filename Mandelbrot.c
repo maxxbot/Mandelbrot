@@ -20,8 +20,8 @@
 	clock_t begin;
   	clock_t end;
 	double totalTime;
-        const int iXmax = 500; 
-        const int iYmax = 500;
+        const int iXmax = 1000; 
+        const int iYmax = 1000;
         /* world ( double) coordinate = parameter plane*/
         double Cx,Cy;
         const double CxMin=-2.5;
@@ -43,7 +43,7 @@
         double Zx2, Zy2; /* Zx2=Zx*Zx;  Zy2=Zy*Zy  */
         /*  */
         int Iteration;
-        const int IterationMax=20;
+        const int IterationMax=36;
         /* bail-out value , radius of circle ;  */
         const double EscapeRadius=2;
         double ER2=EscapeRadius*EscapeRadius;
