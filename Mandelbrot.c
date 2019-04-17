@@ -12,12 +12,16 @@
   */
  #include <stdio.h>
  #include <math.h>
+ #include <time.h>
  int main()
  {
           /* screen ( integer) coordinate */
         int iX,iY;
-        const int iXmax = 800; 
-        const int iYmax = 800;
+	clock_t begin;
+  	clock_t end;
+	double totalTime;
+        const int iXmax = 500; 
+        const int iYmax = 500;
         /* world ( double) coordinate = parameter plane*/
         double Cx,Cy;
         const double CxMin=-2.5;
@@ -31,7 +35,7 @@
         /* it is 24 bit color RGB file */
         const int MaxColorComponentValue=255; 
         FILE * fp;
-        char *filename="new1.ppm";
+        char *filename="fractal.ppm";
         char *comment="# ";/* comment should start with # */
         static unsigned char color[3];
         /* Z=Zx+Zy*i  ;   Z0 = 0 */
@@ -39,7 +43,7 @@
         double Zx2, Zy2; /* Zx2=Zx*Zx;  Zy2=Zy*Zy  */
         /*  */
         int Iteration;
-        const int IterationMax=200;
+        const int IterationMax=20;
         /* bail-out value , radius of circle ;  */
         const double EscapeRadius=2;
         double ER2=EscapeRadius*EscapeRadius;
@@ -48,6 +52,7 @@
         /*write ASCII header to the file*/
         fprintf(fp,"P6\n %s\n %d\n %d\n %d\n",comment,iXmax,iYmax,MaxColorComponentValue);
         /* compute and write image data bytes to the file*/
+	begin = clock();
         for(iY=0;iY<iYmax;iY++)
         {
              Cy=CyMin + iY*PixelHeight;
@@ -85,6 +90,9 @@
                         fwrite(color,1,3,fp);
                 }
         }
+	end = clock();
+	totalTime = (((double)(end - begin))/CLOCKS_PER_SEC);
+	printf("%lf\n", totalTime);
         fclose(fp);
         return 0;
  }
